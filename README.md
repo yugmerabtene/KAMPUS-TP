@@ -1,6 +1,6 @@
-## TP — LANCER UNE INSTANCE EC2 ET DÉPLOYER UN SERVEUR WEB APACHE
+## TP-01 — LANCER UNE INSTANCE EC2 ET DÉPLOYER UN SERVEUR WEB APACHE
 
-### 🎯 Objectifs pédagogiques :
+### Objectifs pédagogiques :
 
 * Créer une **instance EC2 gratuite** (type `t2.micro`) sous **Ubuntu Server 24.04 LTS**.
 * Générer et utiliser une **clé de chiffrement (key pair)** pour accéder à l’instance.
@@ -9,15 +9,15 @@
 
 ---
 
-### 📋 Étapes à suivre :
+### Étapes à suivre :
 
-#### 🟦 1. Connexion à AWS Console
+#### 1. Connexion à AWS Console
 
 Connectez-vous à la console AWS et accédez au service **EC2**.
 
 ---
 
-#### 🟩 2. Lancement d'une instance EC2
+#### 2. Lancement d'une instance EC2
 
 Cliquez sur **"Launch Instance"** et configurez les sections suivantes :
 
@@ -40,7 +40,7 @@ Cliquez sur **"Launch Instance"** et configurez les sections suivantes :
 
 ---
 
-#### 🟨 3. Paramètres réseau
+#### 3. Paramètres réseau
 
 * **VPC** : laissez par défaut
 * **Auto-assign public IP** : activé
@@ -53,7 +53,7 @@ Cliquez sur **"Launch Instance"** et configurez les sections suivantes :
 
 ---
 
-#### 🟫 4. Stockage
+#### 4. Stockage
 
 * Volume : `8 GiB`
 * Type : `gp3`
@@ -61,7 +61,7 @@ Cliquez sur **"Launch Instance"** et configurez les sections suivantes :
 
 ---
 
-#### 🟥 5. Section “Advanced Details” ➜ **User Data**
+#### 5. Section “Advanced Details” ➜ **User Data**
 
 Collez ce **script shell** dans le champ `User Data` :
 
@@ -69,20 +69,20 @@ Collez ce **script shell** dans le champ `User Data` :
 #!/bin/bash
 apt update -y
 apt install apache2 -y
-echo "<h1>Bienvenue sur mon premier serveur Apache déployé via EC2 ! 🚀</h1>" > /var/www/html/index.html
+echo "<h1>Bienvenue sur mon premier serveur Apache déployé via EC2 ! </h1>" > /var/www/html/index.html
 systemctl start apache2
 systemctl enable apache2
 ```
 
 ---
 
-#### 🟦 6. Lancer l’instance
+#### 6. Lancer l’instance
 
 Cliquez sur **"Launch instance"**.
 
 ---
 
-### 🖥️ 7. Tester depuis un navigateur
+### 7. Tester depuis un navigateur
 
 Une fois l’instance **en état “running”**, cliquez sur l’**adresse IPv4 publique**, puis visitez-la dans votre navigateur :
 
@@ -90,30 +90,6 @@ Une fois l’instance **en état “running”**, cliquez sur l’**adresse IPv4
 http://<votre-ip-public-ec2>
 ```
 
-🔍 Vous devriez voir le message HTML s'afficher automatiquement.
-
----
-
-### ✅ Bonus
-
-* Connectez-vous via SSH avec votre clé :
-
-```bash
-ssh -i apache-keypair.pem ubuntu@<IP-PUBLIC>
-```
-
-* Vérifiez que Apache fonctionne :
-
-```bash
-sudo systemctl status apache2
-```
-
----
-
-### 📌 Ce que vous aurez appris :
-
-* Manipulation de base d’EC2 et sécurité SSH
-* Utilisation de `User Data` pour automatiser les déploiements
-* Installation de logiciels et configuration web en mode cloud
+Vous devriez voir le message HTML s'afficher automatiquement.
 
 ---
